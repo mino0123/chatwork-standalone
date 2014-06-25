@@ -74,6 +74,26 @@
     menu.append(closeItem);
     tray.menu = menu;
 
+    guiWindow.on('close', function () {
+      // save window size on close.
+      var config = {};
+      config.window = {};
+      config.window.width = guiWindow.width;
+      config.window.height = guiWindow.height;
+      localStorage.setItem('config', JSON.stringify(config));
+      guiWindow.close(true);
+    });
+
+    // load window size
+    var config = localStorage.getItem('config');
+    if (config) {
+      config = JSON.parse(config);
+      if (config.window) {
+        guiWindow.width = config.window.width;
+        guiWindow.height = config.window.height;
+      }
+    }
+
   </script>
 </body>
 </html>
