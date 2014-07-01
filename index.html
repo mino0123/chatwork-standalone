@@ -87,6 +87,8 @@
       // save window size on close.
       var config = {};
       config.window = {};
+      config.window.x = guiWindow.x;
+      config.window.y = guiWindow.y;
       config.window.width = guiWindow.width;
       config.window.height = guiWindow.height;
       localStorage.setItem('config', JSON.stringify(config));
@@ -98,6 +100,7 @@
     if (config) {
       config = JSON.parse(config);
       if (config.window) {
+        guiWindow.moveTo(config.window.x, config.window.y);
         guiWindow.width = config.window.width;
         guiWindow.height = config.window.height;
       }
