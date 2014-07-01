@@ -17,6 +17,7 @@
 
   <script>
 
+    var exec = require('child_process').exec;
     var gui = require('nw.gui');
     var growl = require('growl');
 
@@ -47,6 +48,14 @@
           callback(0);
         }
       };
+
+      frameWindow.addEventListener('click', function (event) {
+        var target = event.target;
+        if (target.tagName !== 'A') {
+          return;
+        }
+        exec('start ' + target.href, function (err, stdout, stdin) {});
+      });
 
       // ChatWork側デスクトップ通知有効化
       // Setting > SettingView
